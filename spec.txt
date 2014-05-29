@@ -1,0 +1,52 @@
+Bulletin.js - spec:
+
+This is the spec file for the Bulletin project. It'll include all the implemented and in-progress methods, events, endpoints and so on.
+
+Server-side:
+-------
+
+init():
+	-databaseAddress (connection string, inc. auth)
+	-dbName (name of databse to use)
+	-port (will be using that port)
+	-onSetHook (method that will be called when client will be setting a value. If and only if it'll return true, the value will be set. Leave empty if irrelevent)
+	-subscribeHook
+	->>Reurns a bulletin object, on which all methods can be called
+
+set(key, value) //set value to corrospond with key
+push(key, item) //push item to array key
+pull(key) //removes last element from array
+get(key) //returns string if item or array if array
+reset() //resets the database - deletes all
+getAll() //returns array of all items in collection
+
+Events: (using event emitter)
+
+'bulletin.started' (port)  - emmited when server has started
+'bulletin.onSet' (key, value/item, args) - emmited when key has been set
+'bulletin.onSubscribe' (args) - emmited when a client had subscribed with args
+
+
+
+Client - side:
+-------
+
+subscribe(uri, port, args):
+	-uri (address of server)
+	-port (port on server)
+	-args (will be sent to server for hooks)
+	->> returns bulletin object, on which all methods can be called
+
+set(key, value, args)
+push(key, item)
+pull(key)
+get(key)
+getAll()
+reset(args) //for onset hook
+
+
+
+
+
+	
+	
